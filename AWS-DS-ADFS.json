@@ -389,13 +389,19 @@
                         { "Key" : "directoryName", "Value" : [ { "Ref" : "Domain"} ] },
                         { "Key" : "dnsIpAddresses", "Value" : { "Fn::GetAtt" : ["DSMAD2RA5N", "DnsIpAddresses"] } }
                     ]
-                }]                
+                }],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "ec2-as2-2c-p-ads-mgmt-1"
+                    }
+                ]                                
             },            
             "Metadata": {
                 "AWS::CloudFormation::Designer": {
                     "id": "9f70cb8d-790a-40f2-ae3f-f03f3a2a8bdb"
                 }
-            },
+            },             
             "DependsOn": [
                 "DSMAD2RA5N"
             ]
@@ -426,7 +432,13 @@
                         { "Key" : "directoryName", "Value" : [ { "Ref" : "Domain"} ] },
                         { "Key" : "dnsIpAddresses", "Value" : { "Fn::GetAtt" : ["DSMAD2RA5N", "DnsIpAddresses"] } }
                     ]
-                }]                
+                }],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "ec2-as2-2a-p-ads-adfs-1"
+                    }
+                ]                                
             },
             "Metadata": {
                 "AWS::CloudFormation::Designer": {
@@ -462,7 +474,13 @@
                         { "Key" : "directoryName", "Value" : [ { "Ref" : "Domain"} ] },
                         { "Key" : "dnsIpAddresses", "Value" : { "Fn::GetAtt" : ["DSMAD2RA5N", "DnsIpAddresses"] } }
                     ]
-                }]                
+                }],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "ec2-as2-2a-p-ads-adsync-1"
+                    }
+                ]                                
             },
             "Metadata": {
                 "AWS::CloudFormation::Designer": {
@@ -516,9 +534,7 @@
         "SGExtOutboundAll": {
             "Type": "AWS::EC2::SecurityGroupEgress",
             "Properties":{
-              "IpProtocol": "tcp",
-              "FromPort": "0",
-              "ToPort": "65535",
+              "IpProtocol": "-1",
               "CidrIp": "0.0.0.0/0",
               "GroupId": {
                 "Fn::GetAtt": [
@@ -531,9 +547,7 @@
         "SGExtInboundFromSGInt": {
             "Type": "AWS::EC2::SecurityGroupIngress",
             "Properties":{
-                "IpProtocol": "tcp",
-                "FromPort": "0",
-                "ToPort": "65535",
+                "IpProtocol": "-1",
                 "SourceSecurityGroupId": {
                 "Fn::GetAtt": [
                     "EC2SG7YL0",
@@ -566,9 +580,7 @@
         "SGIntOutboundAll": {
             "Type": "AWS::EC2::SecurityGroupEgress",
             "Properties":{
-                "IpProtocol": "tcp",
-                "FromPort": "0",
-                "ToPort": "65535",
+                "IpProtocol": "-1",
                 "CidrIp": "0.0.0.0/0",
                 "GroupId": {
                 "Fn::GetAtt": [
@@ -581,9 +593,7 @@
         "SGIntInboundFromSGExt": {
             "Type": "AWS::EC2::SecurityGroupIngress",
             "Properties":{
-                "IpProtocol": "tcp",
-                "FromPort": "0",
-                "ToPort": "65535",
+                "IpProtocol": "-1",
                 "SourceSecurityGroupId": {
                 "Fn::GetAtt": [
                     "EC2SG2VZRC",
