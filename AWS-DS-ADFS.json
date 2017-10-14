@@ -504,7 +504,7 @@
               "CidrIp": "0.0.0.0/0",
               "GroupId": {
                 "Fn::GetAtt": [
-                  "sg-as2-p-pub-ads-ext-1",
+                  "EC2SG2VZRC",
                   "GroupId"
                 ]
               }
@@ -518,13 +518,13 @@
                 "ToPort": "65535",
                 "SourceSecurityGroupId": {
                 "Fn::GetAtt": [
-                    "sg-as2-p-pvt-ads-int-1",
+                    "EC2SG7YL0",
                     "GroupId"
                 ]
                 },
                 "GroupId": {
                 "Fn::GetAtt": [
-                    "sg-as2-p-pub-ads-ext-1",
+                    "EC2SG2VZRC",
                     "GroupId"
                 ]
                 }
@@ -539,7 +539,7 @@
                 "CidrIp": "0.0.0.0/0",
                 "GroupId": {
                 "Fn::GetAtt": [
-                    "TargetSG",
+                    "EC2SG2VZRC",
                     "GroupId"
                 ]
                 }
@@ -554,7 +554,7 @@
                 "CidrIp": "0.0.0.0/0",
                 "GroupId": {
                 "Fn::GetAtt": [
-                    "sg-as2-p-pvt-ads-int-1",
+                    "EC2SG7YL0",
                     "GroupId"
                 ]
                 }
@@ -568,15 +568,23 @@
                 "ToPort": "65535",
                 "SourceSecurityGroupId": {
                 "Fn::GetAtt": [
-                    "sg-as2-p-pub-ads-ext-1",
+                    "EC2SG2VZRC",
                     "GroupId"
                 ]
                 },
                 "GroupId": {
                 "Fn::GetAtt": [
-                    "sg-as2-p-pvt-ads-int-1",
+                    "EC2SG7YL0",
                     "GroupId"
                 ]
+                }
+            }
+        },
+        "SSMInstanceProfile": {
+            "Type": "AWS::IAM::InstanceProfile",
+            "Properties": {
+                "Roles": {
+                    "Ref": "SSMInstanceRole"
                 }
             }
         },
@@ -584,34 +592,33 @@
             "Type" : "AWS::SSM::Document",
             "Properties" : {
                 "Content" : {
-                "schemaVersion":"1.2",
-                "description":"Join instances to an AWS Directory Service domain.",
-                "parameters":{
-                    "directoryId":{
-                    "type":"String",
-                    "description":"(Required) The ID of the AWS Directory Service directory."
+                    "schemaVersion":"1.2",
+                    "description":"Join instances to an AWS Directory Service domain.",
+                    "parameters":{
+                        "directoryId":{
+                            "type":"String",
+                            "description":"(Required) The ID of the AWS Directory Service directory."
+                        },
+                        "directoryName":{
+                            "type":"String",
+                            "description":"(Required) The name of the directory; for example, test.example.com"
+                        },
+                        "dnsIpAddresses":{
+                            "type":"StringList",
+                            "default":[],
+                            "description":"(Optional) The IP addresses of the DNS servers in the directory. Required when DHCP is not configured. Learn more at http://docs.aws.amazon.com/directoryservice/latest/simple-ad/join_get_dns_addresses.html",
+                            "allowedPattern":"((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+                        }
                     },
-                    "directoryName":{
-                    "type":"String",
-                    "description":"(Required) The name of the directory; for example, test.example.com"
-                    },
-                    "dnsIpAddresses":{
-                    "type":"StringList",
-                    "default":[
-                    ],
-                    "description":"(Optional) The IP addresses of the DNS servers in the directory. Required when DHCP is not configured. Learn more at http://docs.aws.amazon.com/directoryservice/latest/simple-ad/join_get_dns_addresses.html",
-                    "allowedPattern":"((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+                    "runtimeConfig":{
+                        "aws:domainJoin":{
+                            "properties":{
+                                "directoryId":"{{ directoryId }}",
+                                "directoryName":"{{ directoryName }}",
+                                "dnsIpAddresses":"{{ dnsIpAddresses }}"
+                            }
+                        }
                     }
-                },
-                "runtimeConfig":{
-                    "aws:domainJoin":{
-                    "properties":{
-                        "directoryId":"{{ directoryId }}",
-                        "directoryName":"{{ directoryName }}",
-                        "dnsIpAddresses":"{{ dnsIpAddresses }}"
-                    }
-                    }
-                }
                 }
             }
         }                        
@@ -620,16 +627,14 @@
         "Domain": {
             "Description": "The FQDN of the Microsoft Active Directory in AWS, such as corp.example.com",
             "Type": "String",
-            "Default": "corp.example.com",
-            "AllowedPattern": "([a-z]|[0-9])+",
-            "ConstraintDescription": "must contain a-z or 0-9 only."
+            "Default": "corp.example.com"
         },
         "NetBIOS": {
             "Description": "The NetBIOS name of the Microsoft Active Directory domain, usually the first part of the domain name such as CORP",
             "Type": "String",
             "Default": "CORP",
-            "AllowedPattern": "([a-z]|[0-9])+",
-            "ConstraintDescription": "must contain a-z or 0-9 only."
+            "AllowedPattern": "([A-Z]|[0-9])+",
+            "ConstraintDescription": "must contain A-Z or 0-9 only."
         },
         "AWSDSPwd": {
             "NoEcho": "true",
@@ -643,9 +648,9 @@
           "Type" : "AWS::EC2::KeyPair::KeyName",
           "ConstraintDescription" : "must be the name of an existing EC2 KeyPair."
         },
-        "SSMInstanceProfile": {
+        "SSMInstanceRole": {
             "Description" : "Name of an existing EC2 IAM Role to provide access to the AWS resources",
-            "Type" : "AWS::IAM::InstanceProfile::InstanceProfileName",
+            "Type" : "String",
             "ConstraintDescription" : "must be the name of an existing EC2 Instance Role."
           },                
         "VpcId": {
