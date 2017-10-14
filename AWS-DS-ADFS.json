@@ -1,5 +1,8 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
+
+    "Description" : "This template creates public and private subnets, EC2 Windows Server instances and sets up a new AWS Directory Services Microsoft Active Directory.  **NB.** Use alphanumeric characters only for the Stack Name. **WARNING** This template creates Amazon EC2 Windows instances and related resources. You will be billed for the AWS resources used if you create a stack from this template.",
+
     "Metadata": {
         "AWS::CloudFormation::Designer": {
             "2ff77fa1-2121-436f-ac9a-6842c4c27024": {
@@ -330,6 +333,7 @@
         "DSMAD2RA5N": {
             "Type": "AWS::DirectoryService::MicrosoftAD",
             "Properties": {
+                "CreateAlias": "true",
                 "EnableSso": "true",
                 "Name": {
                     "Ref": "Domain"
