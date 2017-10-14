@@ -1,0 +1,497 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Metadata": {
+        "AWS::CloudFormation::Designer": {
+            "2ff77fa1-2121-436f-ac9a-6842c4c27024": {
+                "size": {
+                    "width": 400,
+                    "height": 110
+                },
+                "position": {
+                    "x": 110,
+                    "y": 20
+                },
+                "z": 0,
+                "embeds": [
+                    "870fb9dc-6739-4326-8787-a5c82759f094"
+                ]
+            },
+            "faf3313c-ee1e-4305-ad78-f67c0914ac52": {
+                "size": {
+                    "width": 400,
+                    "height": 110
+                },
+                "position": {
+                    "x": 620,
+                    "y": 20
+                },
+                "z": 0,
+                "embeds": [
+                    "37b2230e-50bb-4adc-8143-5e3d0f3037c5"
+                ]
+            },
+            "37823647-8fab-468b-ad9f-fb67b9d2d18e": {
+                "size": {
+                    "width": 400,
+                    "height": 110
+                },
+                "position": {
+                    "x": 620,
+                    "y": 150
+                },
+                "z": 0,
+                "embeds": []
+            },
+            "58064c1f-a49a-4d15-be95-2217b6c2122b": {
+                "size": {
+                    "width": 400,
+                    "height": 110
+                },
+                "position": {
+                    "x": 620,
+                    "y": 280
+                },
+                "z": 0,
+                "embeds": [
+                    "9f70cb8d-790a-40f2-ae3f-f03f3a2a8bdb"
+                ]
+            },
+            "6581e812-a47b-4ab1-845a-1079449d9663": {
+                "size": {
+                    "width": 140,
+                    "height": 140
+                },
+                "position": {
+                    "x": 168.19141110066042,
+                    "y": 474.4600107891003
+                },
+                "z": 0,
+                "embeds": []
+            },
+            "e633cfe9-f0ff-405b-9006-96475d7797e1": {
+                "size": {
+                    "width": 400,
+                    "height": 110
+                },
+                "position": {
+                    "x": 110,
+                    "y": 150
+                },
+                "z": 0,
+                "embeds": []
+            },
+            "61a111dd-583b-4880-bfd8-9a51945fd7c8": {
+                "size": {
+                    "width": 400,
+                    "height": 110
+                },
+                "position": {
+                    "x": 110,
+                    "y": 280
+                },
+                "z": 0,
+                "embeds": []
+            },
+            "969c710a-2a31-41a0-94e7-1b8ac42e69b3": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 540,
+                    "y": 40
+                },
+                "z": 0,
+                "embeds": []
+            },
+            "1fbc7be7-719b-4e5b-9f86-9f7a0b781802": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 530,
+                    "y": -80
+                },
+                "z": 0,
+                "embeds": [],
+                "isrelatedto": [
+                    "faf3313c-ee1e-4305-ad78-f67c0914ac52",
+                    "37823647-8fab-468b-ad9f-fb67b9d2d18e"
+                ]
+            },
+            "9f70cb8d-790a-40f2-ae3f-f03f3a2a8bdb": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 650,
+                    "y": 310
+                },
+                "z": 1,
+                "parent": "58064c1f-a49a-4d15-be95-2217b6c2122b",
+                "dependson": [
+                    "1fbc7be7-719b-4e5b-9f86-9f7a0b781802"
+                ]
+            },
+            "870fb9dc-6739-4326-8787-a5c82759f094": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 140,
+                    "y": 50
+                },
+                "z": 1,
+                "parent": "2ff77fa1-2121-436f-ac9a-6842c4c27024",
+                "dependson": [
+                    "1fbc7be7-719b-4e5b-9f86-9f7a0b781802"
+                ]
+            },
+            "37b2230e-50bb-4adc-8143-5e3d0f3037c5": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 650,
+                    "y": 40
+                },
+                "z": 1,
+                "parent": "faf3313c-ee1e-4305-ad78-f67c0914ac52",
+                "dependson": [
+                    "1fbc7be7-719b-4e5b-9f86-9f7a0b781802"
+                ]
+            },
+            "768ac114-3788-4ca6-b70a-f44b4d248168": {
+                "source": {
+                    "id": "37b2230e-50bb-4adc-8143-5e3d0f3037c5"
+                },
+                "target": {
+                    "id": "1fbc7be7-719b-4e5b-9f86-9f7a0b781802"
+                },
+                "z": 11
+            },
+            "ea8ea81a-e2d0-4bc1-b362-2d2a5a2700e5": {
+                "source": {
+                    "id": "9f70cb8d-790a-40f2-ae3f-f03f3a2a8bdb"
+                },
+                "target": {
+                    "id": "1fbc7be7-719b-4e5b-9f86-9f7a0b781802"
+                },
+                "z": 12
+            },
+            "d39bf820-a11b-47b2-bbaa-aba00f2890bf": {
+                "source": {
+                    "id": "870fb9dc-6739-4326-8787-a5c82759f094"
+                },
+                "target": {
+                    "id": "1fbc7be7-719b-4e5b-9f86-9f7a0b781802"
+                },
+                "z": 13
+            }
+        }
+    },
+    "Resources": {
+        "EC2S7LJ2": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": "10.0.10.0/24",
+                "AvailabilityZone": "ap-southeast-2a",
+                "MapPublicIpOnLaunch": "true",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "subnet-as2-p-pub-ads-adfs-1"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "VpcId"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "2ff77fa1-2121-436f-ac9a-6842c4c27024"
+                }
+            }
+        },
+        "EC2S28MV3": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": "10.0.20.0/24",
+                "AvailabilityZone": "ap-southeast-2a",
+                "MapPublicIpOnLaunch": "false",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "subnet-as2-p-prv-ads-adfs-1"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "VpcId"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "faf3313c-ee1e-4305-ad78-f67c0914ac52"
+                }
+            }
+        },
+        "EC2S2FJFI": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": "10.0.21.0/24",
+                "AvailabilityZone": "ap-southeast-2b",
+                "MapPublicIpOnLaunch": "false",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "subnet-as2-p-prv-ads-adfs-2"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "VpcId"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "37823647-8fab-468b-ad9f-fb67b9d2d18e"
+                }
+            }
+        },
+        "EC2S1116S": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": "10.0.22.0/24",
+                "AvailabilityZone": "ap-southeast-2c",
+                "MapPublicIpOnLaunch": "false",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "subnet-as2-p-prv-ads-adfs-3"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "VpcId"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "58064c1f-a49a-4d15-be95-2217b6c2122b"
+                }
+            }
+        },
+        "EC2S1ACR2": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": "10.0.11.0/24",
+                "AvailabilityZone": "ap-southeast-2b",
+                "MapPublicIpOnLaunch": "true",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "subnet-as2-p-pub-ads-adfs-2"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "VpcId"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "e633cfe9-f0ff-405b-9006-96475d7797e1"
+                }
+            }
+        },
+        "EC2S4TXPU": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "CidrBlock": "10.0.12.0/24",
+                "AvailabilityZone": "ap-southeast-2c",
+                "MapPublicIpOnLaunch": "true",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "subnet-as2-p-pub-ads-adfs-3"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "VpcId"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "61a111dd-583b-4880-bfd8-9a51945fd7c8"
+                }
+            }
+        },
+        "EC2SG7YL0": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {},
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "969c710a-2a31-41a0-94e7-1b8ac42e69b3"
+                }
+            }
+        },
+        "DSMAD2RA5N": {
+            "Type": "AWS::DirectoryService::MicrosoftAD",
+            "Properties": {
+                "EnableSso": "true",
+                "Name": {
+                    "Ref": "Domain"
+                },
+                "Password": {
+                    "Ref": "AWSDSPwd"
+                },
+                "ShortName": {
+                    "Ref": "NetBIOS"
+                },
+                "VpcSettings": {
+                    "SubnetIds": [
+                        {
+                            "Ref": "EC2S28MV3"
+                        },
+                        {
+                            "Ref": "EC2S2FJFI"
+                        }
+                    ],
+                    "VpcId": {
+                        "Ref": "VpcId"
+                    }
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "1fbc7be7-719b-4e5b-9f86-9f7a0b781802"
+                }
+            }
+        },
+        "EC2I3XHFV": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "EC2S1116S"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "9f70cb8d-790a-40f2-ae3f-f03f3a2a8bdb"
+                }
+            },
+            "DependsOn": [
+                "DSMAD2RA5N"
+            ]
+        },
+        "EC2I1IKJL": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+              "IamInstanceProfile" : {
+                  "Ref": "SSMInstanceProfile"
+              },
+              "ImageId": {
+                  "Ref": "ADFSAMI"
+              },
+              "InstanceType": "t2.micro",
+              "KeyName": {
+                  "Ref": "EC2KeyPair"
+              },
+              "Monitoring" : Boolean,
+              "NetworkInterfaces" : [ EC2 Network Interface, ... ],
+              "PlacementGroupName" : String,
+              "PrivateIpAddress" : String,
+              "RamdiskId" : String,
+              "SecurityGroupIds" : [ String, ... ],
+              "SecurityGroups" : [ String, ... ],
+              "SourceDestCheck" : Boolean,
+              "SsmAssociations" : [ SSMAssociation, ... ],                
+                "SubnetId": {
+                    "Ref": "EC2S7LJ2"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "870fb9dc-6739-4326-8787-a5c82759f094"
+                }
+            },
+            "DependsOn": [
+                "DSMAD2RA5N"
+            ]
+        },
+        "EC2I22FGZ": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "EC2S28MV3"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "37b2230e-50bb-4adc-8143-5e3d0f3037c5"
+                }
+            },
+            "DependsOn": [
+                "DSMAD2RA5N"
+            ]
+        }
+    },
+    "Parameters": {
+        "Domain": {
+            "Description": "The FQDN of the Microsoft Active Directory in AWS, such as corp.example.com",
+            "Type": "String",
+            "Default": "corp.example.com",
+            "AllowedPattern": "([a-z]|[0-9])+",
+            "ConstraintDescription": "must contain a-z or 0-9 only."
+        },
+        "NetBIOS": {
+            "Description": "The NetBIOS name of the Microsoft Active Directory domain, usually the first part of the domain name such as CORP",
+            "Type": "String",
+            "Default": "CORP",
+            "AllowedPattern": "([a-z]|[0-9])+",
+            "ConstraintDescription": "must contain a-z or 0-9 only."
+        },
+        "AWSDSPwd": {
+            "NoEcho": "true",
+            "Type": "String",
+            "Description": "Password required for the default administrative user, Admin",
+            "MinLength": "8",
+            "ConstraintDescription": "the password must be at least 8 characters"
+        },
+        "EC2KeyPair": {
+          "Description" : "Name of an existing EC2 KeyPair to enable access to the instances",
+          "Type" : "AWS::EC2::KeyPair::KeyName",
+          "ConstraintDescription" : "must be the name of an existing EC2 KeyPair."
+        },        
+        "VpcId": {
+            "Type": "AWS::EC2::VPC::Id",
+            "Description": "VpcId of your existing Virtual Private Cloud (VPC)",
+            "ConstraintDescription": "must be the VPC Id of an existing Virtual Private Cloud."
+        },
+        "ADFSAMI": {
+            "Description": "The Windows Server AMI ID required for the ADFS EC2 Instance, such as ami-5648ad2c",
+            "Type": "String",
+            "AllowedPattern": "ami-([a-f]|[0-9])+",
+            "MinLength": "12",
+            "MinLength": "12",
+            "ConstraintDescription": "must start with 'ami-' and be 12 characters."
+        },
+        "ADSyncAMI": {
+            "Description": "The Windows Server AMI ID required for the ADSync EC2 Instance, such as ami-5648ad2c",
+            "Type": "String",
+            "AllowedPattern": "ami-([a-f]|[0-9])+",
+            "MinLength": "12",
+            "MinLength": "12",
+            "ConstraintDescription": "must start with 'ami-' and be 12 characters."
+        },
+        "ADMgmtAMI": {
+            "Description": "The Windows Server AMI ID required for the AD Mgmt EC2 Instance, such as ami-5648ad2c",
+            "Type": "String",
+            "AllowedPattern": "ami-([a-f]|[0-9])+",
+            "MinLength": "12",
+            "MinLength": "12",
+            "ConstraintDescription": "must start with 'ami-' and be 12 characters."
+        }        
+    }
+}
