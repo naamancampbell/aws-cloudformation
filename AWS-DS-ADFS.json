@@ -709,11 +709,6 @@
             "Type": "AWS::EC2::VPC::Id",
             "Description": "VPC ID of your existing Virtual Private Cloud (VPC)",
             "ConstraintDescription": "must be the VPC Id of an existing Virtual Private Cloud."
-        },
-        "RouteTable": {
-            "Type": "AWS::EC2::RouteTable::Id",
-            "Description": "Route Table ID of your existing Virtual Private Cloud (VPC)",
-            "ConstraintDescription": "must be the Route Table ID of an existing Virtual Private Cloud."
         },        
         "ADFSAMI": {
             "Description": "The Windows Server AMI ID required for the ADFS EC2 Instance, such as ami-663bdc04",
