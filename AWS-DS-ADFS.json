@@ -198,7 +198,7 @@
         "EC2S7LJ2": {
             "Type": "AWS::EC2::Subnet",
             "Properties": {
-                "CidrBlock": "10.0.10.0/24",
+                "CidrBlock": "172.31.112.0/24",
                 "AvailabilityZone": "ap-southeast-2a",
                 "MapPublicIpOnLaunch": "true",
                 "Tags": [
@@ -220,7 +220,7 @@
         "EC2S28MV3": {
             "Type": "AWS::EC2::Subnet",
             "Properties": {
-                "CidrBlock": "10.0.20.0/24",
+                "CidrBlock": "172.31.128.0/24",
                 "AvailabilityZone": "ap-southeast-2a",
                 "MapPublicIpOnLaunch": "false",
                 "Tags": [
@@ -242,7 +242,7 @@
         "EC2S2FJFI": {
             "Type": "AWS::EC2::Subnet",
             "Properties": {
-                "CidrBlock": "10.0.21.0/24",
+                "CidrBlock": "172.31.129.0/24",
                 "AvailabilityZone": "ap-southeast-2b",
                 "MapPublicIpOnLaunch": "false",
                 "Tags": [
@@ -264,7 +264,7 @@
         "EC2S1116S": {
             "Type": "AWS::EC2::Subnet",
             "Properties": {
-                "CidrBlock": "10.0.22.0/24",
+                "CidrBlock": "172.31.130.0/24",
                 "AvailabilityZone": "ap-southeast-2c",
                 "MapPublicIpOnLaunch": "false",
                 "Tags": [
@@ -286,7 +286,7 @@
         "EC2S1ACR2": {
             "Type": "AWS::EC2::Subnet",
             "Properties": {
-                "CidrBlock": "10.0.11.0/24",
+                "CidrBlock": "172.31.113.0/24",
                 "AvailabilityZone": "ap-southeast-2b",
                 "MapPublicIpOnLaunch": "true",
                 "Tags": [
@@ -308,7 +308,7 @@
         "EC2S4TXPU": {
             "Type": "AWS::EC2::Subnet",
             "Properties": {
-                "CidrBlock": "10.0.12.0/24",
+                "CidrBlock": "172.31.114.0/24",
                 "AvailabilityZone": "ap-southeast-2c",
                 "MapPublicIpOnLaunch": "true",
                 "Tags": [
@@ -468,11 +468,16 @@
         "EC2SG2VZRC": {
             "Type": "AWS::EC2::SecurityGroup",
             "Properties": {
-                "GroupName" : "sg-as2-p-pub-ads-ext-1",
                 "GroupDescription" : "Public-facing Active Directory Services Security Group",              
                 "VpcId": {
                     "Ref": "VpcId"
-                }                                
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "sg-as2-p-pub-ads-ext-1"
+                    }
+                ]                                                
             },
             "Metadata": {
                 "AWS::CloudFormation::Designer": {
@@ -483,11 +488,16 @@
         "EC2SG7YL0": {
             "Type": "AWS::EC2::SecurityGroup",
             "Properties": {
-                "GroupName" : "sg-as2-p-pvt-ads-int-1",
                 "GroupDescription" : "Internal Active Directory Services Security Group",              
                 "VpcId": {
                     "Ref": "VpcId"
-                }                
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "sg-as2-p-pvt-ads-int-1"
+                    }
+                ]                                 
             },
             "Metadata": {
                 "AWS::CloudFormation::Designer": {
@@ -579,13 +589,13 @@
                 ]
                 }
             }
-        },
+        },      
         "SSMInstanceProfile": {
             "Type": "AWS::IAM::InstanceProfile",
             "Properties": {
-                "Roles": {
+                "Roles": [{
                     "Ref": "SSMInstanceRole"
-                }
+                }]
             }
         },
         "SSMDocument" : {
