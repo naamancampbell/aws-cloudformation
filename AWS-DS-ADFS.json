@@ -363,6 +363,25 @@
         "EC2I3XHFV": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
+                "IamInstanceProfile" : {
+                    "Ref": "SSMInstanceProfile"
+                },
+                "ImageId": {
+                    "Ref": "ADMgmtAMI"
+                },
+                "InstanceType": "t2.micro",
+                "KeyName": {
+                    "Ref": "EC2KeyPair"
+                },              
+                "SecurityGroups" : [ { "Ref" : "EC2SG7YL0" } ],              
+                "SsmAssociations" : [{
+                    "DocumentName" : { "Ref" : "SSMDocument" },
+                    "AssociationParameters" : [
+                        { "Key" : "directoryId", "Value" : [ { "Ref" : "DSMAD2RA5N" } ] },
+                        { "Key" : "directoryName", "Value" : [ { "Ref" : "Domain"} ] },
+                        { "Key" : "dnsIpAddresses", "Value" : { "Fn::GetAtt" : ["DSMAD2RA5N", "DnsIpAddresses"] } }
+                    ]
+                }],                
                 "SubnetId": {
                     "Ref": "EC2S1116S"
                 }
@@ -379,25 +398,25 @@
         "EC2I1IKJL": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
-              "IamInstanceProfile" : {
-                  "Ref": "SSMInstanceProfile"
-              },
-              "ImageId": {
-                  "Ref": "ADFSAMI"
-              },
-              "InstanceType": "t2.micro",
-              "KeyName": {
-                  "Ref": "EC2KeyPair"
-              },              
-              "SecurityGroups" : [ { "Ref" : "EC2SG2VZRC" } ],              
-              "SsmAssociations" : [{
-                "DocumentName" : {"Ref" : "SSMDocument"},
-                "AssociationParameters" : [
-                  { "Key" : "directoryId", "Value" : [ { "Ref" : "DSMAD2RA5N" } ] },
-                  { "Key" : "directoryName", "Value" : [ { "Ref" : "Domain"} ] },
-                  { "Key" : "dnsIpAddresses", "Value" : { "Fn::GetAtt" : ["DSMAD2RA5N", "DnsIpAddresses"] } }
-                ]
-              }],                
+                "IamInstanceProfile" : {
+                    "Ref": "SSMInstanceProfile"
+                },
+                "ImageId": {
+                    "Ref": "ADFSAMI"
+                },
+                "InstanceType": "t2.micro",
+                "KeyName": {
+                    "Ref": "EC2KeyPair"
+                },              
+                "SecurityGroups" : [ { "Ref" : "EC2SG2VZRC" } ],              
+                "SsmAssociations" : [{
+                    "DocumentName" : { "Ref" : "SSMDocument" },
+                    "AssociationParameters" : [
+                        { "Key" : "directoryId", "Value" : [ { "Ref" : "DSMAD2RA5N" } ] },
+                        { "Key" : "directoryName", "Value" : [ { "Ref" : "Domain"} ] },
+                        { "Key" : "dnsIpAddresses", "Value" : { "Fn::GetAtt" : ["DSMAD2RA5N", "DnsIpAddresses"] } }
+                    ]
+                }],                
                 "SubnetId": {
                     "Ref": "EC2S7LJ2"
                 }
@@ -414,6 +433,25 @@
         "EC2I22FGZ": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
+                "IamInstanceProfile" : {
+                    "Ref": "SSMInstanceProfile"
+                },
+                "ImageId": {
+                    "Ref": "ADSyncAMI"
+                },
+                "InstanceType": "t2.micro",
+                "KeyName": {
+                    "Ref": "EC2KeyPair"
+                },              
+                "SecurityGroups" : [ { "Ref" : "EC2SG7YL0" } ],              
+                "SsmAssociations" : [{
+                    "DocumentName" : { "Ref" : "SSMDocument" },
+                    "AssociationParameters" : [
+                        { "Key" : "directoryId", "Value" : [ { "Ref" : "DSMAD2RA5N" } ] },
+                        { "Key" : "directoryName", "Value" : [ { "Ref" : "Domain"} ] },
+                        { "Key" : "dnsIpAddresses", "Value" : { "Fn::GetAtt" : ["DSMAD2RA5N", "DnsIpAddresses"] } }
+                    ]
+                }],                
                 "SubnetId": {
                     "Ref": "EC2S28MV3"
                 }
@@ -543,39 +581,39 @@
             }
         },
         "SSMDocument" : {
-        "Type" : "AWS::SSM::Document",
-        "Properties" : {
-            "Content" : {
-            "schemaVersion":"1.2",
-            "description":"Join instances to an AWS Directory Service domain.",
-            "parameters":{
-                "directoryId":{
-                "type":"String",
-                "description":"(Required) The ID of the AWS Directory Service directory."
+            "Type" : "AWS::SSM::Document",
+            "Properties" : {
+                "Content" : {
+                "schemaVersion":"1.2",
+                "description":"Join instances to an AWS Directory Service domain.",
+                "parameters":{
+                    "directoryId":{
+                    "type":"String",
+                    "description":"(Required) The ID of the AWS Directory Service directory."
+                    },
+                    "directoryName":{
+                    "type":"String",
+                    "description":"(Required) The name of the directory; for example, test.example.com"
+                    },
+                    "dnsIpAddresses":{
+                    "type":"StringList",
+                    "default":[
+                    ],
+                    "description":"(Optional) The IP addresses of the DNS servers in the directory. Required when DHCP is not configured. Learn more at http://docs.aws.amazon.com/directoryservice/latest/simple-ad/join_get_dns_addresses.html",
+                    "allowedPattern":"((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+                    }
                 },
-                "directoryName":{
-                "type":"String",
-                "description":"(Required) The name of the directory; for example, test.example.com"
-                },
-                "dnsIpAddresses":{
-                "type":"StringList",
-                "default":[
-                ],
-                "description":"(Optional) The IP addresses of the DNS servers in the directory. Required when DHCP is not configured. Learn more at http://docs.aws.amazon.com/directoryservice/latest/simple-ad/join_get_dns_addresses.html",
-                "allowedPattern":"((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
-                }
-            },
-            "runtimeConfig":{
-                "aws:domainJoin":{
-                "properties":{
-                    "directoryId":"{{ directoryId }}",
-                    "directoryName":"{{ directoryName }}",
-                    "dnsIpAddresses":"{{ dnsIpAddresses }}"
+                "runtimeConfig":{
+                    "aws:domainJoin":{
+                    "properties":{
+                        "directoryId":"{{ directoryId }}",
+                        "directoryName":"{{ directoryName }}",
+                        "dnsIpAddresses":"{{ dnsIpAddresses }}"
+                    }
+                    }
                 }
                 }
             }
-            }
-        }
         }                        
     },                              
     "Parameters": {
@@ -604,7 +642,12 @@
           "Description" : "Name of an existing EC2 KeyPair to enable access to the instances",
           "Type" : "AWS::EC2::KeyPair::KeyName",
           "ConstraintDescription" : "must be the name of an existing EC2 KeyPair."
-        },        
+        },
+        "SSMInstanceProfile": {
+            "Description" : "Name of an existing EC2 IAM Role to provide access to the AWS resources",
+            "Type" : "AWS::IAM::InstanceProfile::InstanceProfileName",
+            "ConstraintDescription" : "must be the name of an existing EC2 Instance Role."
+          },                
         "VpcId": {
             "Type": "AWS::EC2::VPC::Id",
             "Description": "VpcId of your existing Virtual Private Cloud (VPC)",
