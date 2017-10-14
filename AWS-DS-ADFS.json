@@ -625,13 +625,27 @@
                "VpcId" : { "Ref" : "VpcId" }
             }
         },
-        "InternalSubnetRouteTableAssoc" : {
+        "Int1SubnetRouteTableAssoc" : {
             "Type" : "AWS::EC2::SubnetRouteTableAssociation",
             "Properties" : {
                "RouteTableId" : { "Ref": "InternalRouteTable" },
-               "SubnetId" : { "Ref": "EC2SG7YL0" }
-            }
-        },                      
+               "SubnetId" : { "Ref": "EC2S28MV3" }
+            }          
+        },
+        "Int2SubnetRouteTableAssoc" : {
+            "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties" : {
+               "RouteTableId" : { "Ref": "InternalRouteTable" },
+               "SubnetId" : { "Ref": "EC2S2FJFI" }
+            }          
+        },
+        "Int3SubnetRouteTableAssoc" : {
+            "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties" : {
+               "RouteTableId" : { "Ref": "InternalRouteTable" },
+               "SubnetId" : { "Ref": "EC2S1116S" }
+            }          
+        },                                      
         "SSMInstanceProfile": {
             "Type": "AWS::IAM::InstanceProfile",
             "Properties": {
@@ -713,6 +727,7 @@
         "ADFSAMI": {
             "Description": "The Windows Server AMI ID required for the ADFS EC2 Instance, such as ami-663bdc04",
             "Type": "String",
+            "Default": "ami-663bdc04",
             "AllowedPattern": "ami-([a-f]|[0-9])+",
             "MinLength": "12",
             "MaxLength": "12",
@@ -721,6 +736,7 @@
         "ADSyncAMI": {
             "Description": "The Windows Server AMI ID required for the ADSync EC2 Instance, such as ami-663bdc04",
             "Type": "String",
+            "Default": "ami-663bdc04",
             "AllowedPattern": "ami-([a-f]|[0-9])+",
             "MinLength": "12",
             "MaxLength": "12",
@@ -729,6 +745,7 @@
         "ADMgmtAMI": {
             "Description": "The Windows Server AMI ID required for the AD Mgmt EC2 Instance, such as ami-663bdc04",
             "Type": "String",
+            "Default": "ami-663bdc04",
             "AllowedPattern": "ami-([a-f]|[0-9])+",
             "MinLength": "12",
             "MaxLength": "12",
