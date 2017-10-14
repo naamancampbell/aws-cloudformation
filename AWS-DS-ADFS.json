@@ -376,8 +376,12 @@
                 "InstanceType": "t2.micro",
                 "KeyName": {
                     "Ref": "EC2KeyPair"
-                },              
-                "SecurityGroups" : [ { "Ref" : "EC2SG7YL0" } ],              
+                },
+                "NetworkInterfaces": [{
+                    "DeviceIndex": "0",
+                    "GroupSet": [{ "Ref" : "EC2SG7YL0" }],
+                    "SubnetId": { "Ref" : "EC2S1116S" }
+                }],                                            
                 "SsmAssociations" : [{
                     "DocumentName" : { "Ref" : "SSMDocument" },
                     "AssociationParameters" : [
@@ -385,11 +389,8 @@
                         { "Key" : "directoryName", "Value" : [ { "Ref" : "Domain"} ] },
                         { "Key" : "dnsIpAddresses", "Value" : { "Fn::GetAtt" : ["DSMAD2RA5N", "DnsIpAddresses"] } }
                     ]
-                }],                
-                "SubnetId": {
-                    "Ref": "EC2S1116S"
-                }
-            },
+                }]                
+            },            
             "Metadata": {
                 "AWS::CloudFormation::Designer": {
                     "id": "9f70cb8d-790a-40f2-ae3f-f03f3a2a8bdb"
@@ -411,8 +412,13 @@
                 "InstanceType": "t2.micro",
                 "KeyName": {
                     "Ref": "EC2KeyPair"
-                },              
-                "SecurityGroups" : [ { "Ref" : "EC2SG2VZRC" } ],              
+                },
+                "NetworkInterfaces": [{
+                    "AssociatePublicIpAddress": "true",
+                    "DeviceIndex": "0",
+                    "GroupSet": [{ "Ref" : "EC2SG2VZRC" }],
+                    "SubnetId": { "Ref" : "EC2S7LJ2" }
+                }],                                            
                 "SsmAssociations" : [{
                     "DocumentName" : { "Ref" : "SSMDocument" },
                     "AssociationParameters" : [
@@ -420,10 +426,7 @@
                         { "Key" : "directoryName", "Value" : [ { "Ref" : "Domain"} ] },
                         { "Key" : "dnsIpAddresses", "Value" : { "Fn::GetAtt" : ["DSMAD2RA5N", "DnsIpAddresses"] } }
                     ]
-                }],                
-                "SubnetId": {
-                    "Ref": "EC2S7LJ2"
-                }
+                }]                
             },
             "Metadata": {
                 "AWS::CloudFormation::Designer": {
@@ -446,8 +449,12 @@
                 "InstanceType": "t2.micro",
                 "KeyName": {
                     "Ref": "EC2KeyPair"
-                },              
-                "SecurityGroups" : [ { "Ref" : "EC2SG7YL0" } ],              
+                },
+                "NetworkInterfaces": [{
+                    "DeviceIndex": "0",
+                    "GroupSet": [{ "Ref" : "EC2SG7YL0" }],
+                    "SubnetId": { "Ref" : "EC2S28MV3" }
+                }],                                           
                 "SsmAssociations" : [{
                     "DocumentName" : { "Ref" : "SSMDocument" },
                     "AssociationParameters" : [
@@ -455,10 +462,7 @@
                         { "Key" : "directoryName", "Value" : [ { "Ref" : "Domain"} ] },
                         { "Key" : "dnsIpAddresses", "Value" : { "Fn::GetAtt" : ["DSMAD2RA5N", "DnsIpAddresses"] } }
                     ]
-                }],                
-                "SubnetId": {
-                    "Ref": "EC2S28MV3"
-                }
+                }]                
             },
             "Metadata": {
                 "AWS::CloudFormation::Designer": {
@@ -593,7 +597,41 @@
                 ]
                 }
             }
-        },      
+        },
+        "NAT" : {            
+            "Type" : "AWS::EC2::NatGateway",
+            "Properties" : {
+              "AllocationId" : { "Fn::GetAtt" : [ "EIP", "AllocationId" ] },
+              "SubnetId" : { "Ref" : "EC2S1ACR2" }
+            }
+          },
+        "EIP" : {
+            "Type" : "AWS::EC2::EIP",
+            "Properties" : {
+              "Domain" : "vpc"
+            }
+          },
+        "Route" : {
+            "Type" : "AWS::EC2::Route",
+            "Properties" : {
+              "RouteTableId" : { "Ref" : "InternalRouteTable" },
+              "DestinationCidrBlock" : "0.0.0.0/0",
+              "NatGatewayId" : { "Ref" : "NAT" }
+            }
+        },
+        "InternalRouteTable" : {
+            "Type" : "AWS::EC2::RouteTable",
+            "Properties" : {
+               "VpcId" : { "Ref" : "VpcId" }
+            }
+        },
+        "InternalSubnetRouteTableAssoc" : {
+            "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties" : {
+               "RouteTableId" : { "Ref": "InternalRouteTable" },
+               "SubnetId" : { "Ref": "EC2SG7YL0" }
+            }
+        },                      
         "SSMInstanceProfile": {
             "Type": "AWS::IAM::InstanceProfile",
             "Properties": {
@@ -669,9 +707,14 @@
           },                
         "VpcId": {
             "Type": "AWS::EC2::VPC::Id",
-            "Description": "VpcId of your existing Virtual Private Cloud (VPC)",
+            "Description": "VPC ID of your existing Virtual Private Cloud (VPC)",
             "ConstraintDescription": "must be the VPC Id of an existing Virtual Private Cloud."
         },
+        "RouteTable": {
+            "Type": "AWS::EC2::RouteTable::Id",
+            "Description": "Route Table ID of your existing Virtual Private Cloud (VPC)",
+            "ConstraintDescription": "must be the Route Table ID of an existing Virtual Private Cloud."
+        },        
         "ADFSAMI": {
             "Description": "The Windows Server AMI ID required for the ADFS EC2 Instance, such as ami-663bdc04",
             "Type": "String",
