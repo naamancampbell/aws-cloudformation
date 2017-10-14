@@ -562,7 +562,7 @@
                 }
             }
         },          
-        "SGExtInboundFromInternet": {
+        "SGExtInboundHTTPSFromInternet": {
             "Type": "AWS::EC2::SecurityGroupIngress",
             "Properties":{
                 "IpProtocol": "tcp",
@@ -577,6 +577,21 @@
                 }
             }
         },
+        "SGExtInboundRDPFromKnownHosts": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties":{
+                "IpProtocol": "tcp",
+                "FromPort": "3389",
+                "ToPort": "3389",
+                "CidrIp": { "Ref": "SourceCidrForRDP" },
+                "GroupId": {
+                "Fn::GetAtt": [
+                    "EC2SG2VZRC",
+                    "GroupId"
+                ]
+                }
+            }
+        },        
         "SGIntOutboundAll": {
             "Type": "AWS::EC2::SecurityGroupEgress",
             "Properties":{
@@ -733,7 +748,14 @@
             "Type": "AWS::EC2::VPC::Id",
             "Description": "VPC ID of your existing Virtual Private Cloud (VPC)",
             "ConstraintDescription": "must be the VPC Id of an existing Virtual Private Cloud."
-        },        
+        },
+        "SourceCidrForRDP" : {
+            "Description" : "IP CIDR from which you are likely to RDP into the instances. You can add rules later by modifying the created security groups e.g. 54.32.98.160/32 - /32 restricts to a single IP address",
+            "Type" : "String",
+            "MinLength" : "9",
+            "MaxLength" : "18",
+            "AllowedPattern" : "^([0-9]+\\.){3}[0-9]+\\/[0-9]+$"
+        },                
         "ADFSAMI": {
             "Description": "The Windows Server AMI ID required for the ADFS EC2 Instance, such as ami-663bdc04",
             "Type": "String",
