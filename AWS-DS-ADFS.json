@@ -397,15 +397,8 @@
               "InstanceType": "t2.micro",
               "KeyName": {
                   "Ref": "EC2KeyPair"
-              },
-              "Monitoring" : Boolean,
-              "NetworkInterfaces" : [ EC2 Network Interface, ... ],
-              "PlacementGroupName" : String,
-              "PrivateIpAddress" : String,
-              "RamdiskId" : String,
-              "SecurityGroupIds" : [ String, ... ],
-              "SecurityGroups" : [ String, ... ],
-              "SourceDestCheck" : Boolean,
+              },              
+              "SecurityGroups" : [ { "Ref" : "EC2SG2VZRC" } ],              
               "SsmAssociations" : [ SSMAssociation, ... ],                
                 "SubnetId": {
                     "Ref": "EC2S7LJ2"
@@ -435,7 +428,123 @@
             "DependsOn": [
                 "DSMAD2RA5N"
             ]
-        }
+        },
+        "EC2SG2VZRC": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupName" : "sg-as2-p-pub-ads-ext-1",
+                "GroupDescription" : "Public-facing Active Directory Services Security Group",              
+                "VpcId": {
+                    "Ref": "VpcId"
+                }                                
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "aba39da7-6ecd-4eb5-9b25-667be042c03d"
+                }
+            }
+        },
+        "EC2SG7YL0": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupName" : "sg-as2-p-pvt-ads-int-1",
+                "GroupDescription" : "Internal Active Directory Services Security Group",              
+                "VpcId": {
+                    "Ref": "VpcId"
+                }                
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "969c710a-2a31-41a0-94e7-1b8ac42e69b3"
+                }
+            }
+        },
+        "SGExtOutboundAll": {
+            "Type": "AWS::EC2::SecurityGroupEgress",
+            "Properties":{
+              "IpProtocol": "tcp",
+              "FromPort": "0",
+              "ToPort": "65535",
+              "CidrIp": "0.0.0.0/0",
+              "GroupId": {
+                "Fn::GetAtt": [
+                  "sg-as2-p-pub-ads-ext-1",
+                  "GroupId"
+                ]
+              }
+            }
+          },
+          "SGExtInboundFromSGInt": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties":{
+              "IpProtocol": "tcp",
+              "FromPort": "0",
+              "ToPort": "65535",
+              "SourceSecurityGroupId": {
+                "Fn::GetAtt": [
+                  "sg-as2-p-pvt-ads-int-1",
+                  "GroupId"
+                ]
+              },
+              "GroupId": {
+                "Fn::GetAtt": [
+                  "sg-as2-p-pub-ads-ext-1",
+                  "GroupId"
+                ]
+              }
+            }
+          },          
+          "SGExtInboundFromInternet": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties":{
+              "IpProtocol": "tcp",
+              "FromPort": "443",
+              "ToPort": "443",
+              "CidrIp": "0.0.0.0/0",
+              "GroupId": {
+                "Fn::GetAtt": [
+                  "TargetSG",
+                  "GroupId"
+                ]
+              }
+            }
+          },
+          "SGIntOutboundAll": {
+            "Type": "AWS::EC2::SecurityGroupEgress",
+            "Properties":{
+              "IpProtocol": "tcp",
+              "FromPort": "0",
+              "ToPort": "65535",
+              "CidrIp": "0.0.0.0/0",
+              "GroupId": {
+                "Fn::GetAtt": [
+                  "sg-as2-p-pvt-ads-int-1",
+                  "GroupId"
+                ]
+              }
+            }
+          },
+          "SGIntInboundFromSGExt": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties":{
+              "IpProtocol": "tcp",
+              "FromPort": "0",
+              "ToPort": "65535",
+              "SourceSecurityGroupId": {
+                "Fn::GetAtt": [
+                  "sg-as2-p-pub-ads-ext-1",
+                  "GroupId"
+                ]
+              },
+              "GroupId": {
+                "Fn::GetAtt": [
+                  "sg-as2-p-pvt-ads-int-1",
+                  "GroupId"
+                ]
+              }
+            }
+          }                    
+        }                      
     },
     "Parameters": {
         "Domain": {
@@ -470,7 +579,7 @@
             "ConstraintDescription": "must be the VPC Id of an existing Virtual Private Cloud."
         },
         "ADFSAMI": {
-            "Description": "The Windows Server AMI ID required for the ADFS EC2 Instance, such as ami-5648ad2c",
+            "Description": "The Windows Server AMI ID required for the ADFS EC2 Instance, such as ami-663bdc04",
             "Type": "String",
             "AllowedPattern": "ami-([a-f]|[0-9])+",
             "MinLength": "12",
@@ -478,7 +587,7 @@
             "ConstraintDescription": "must start with 'ami-' and be 12 characters."
         },
         "ADSyncAMI": {
-            "Description": "The Windows Server AMI ID required for the ADSync EC2 Instance, such as ami-5648ad2c",
+            "Description": "The Windows Server AMI ID required for the ADSync EC2 Instance, such as ami-663bdc04",
             "Type": "String",
             "AllowedPattern": "ami-([a-f]|[0-9])+",
             "MinLength": "12",
@@ -486,7 +595,7 @@
             "ConstraintDescription": "must start with 'ami-' and be 12 characters."
         },
         "ADMgmtAMI": {
-            "Description": "The Windows Server AMI ID required for the AD Mgmt EC2 Instance, such as ami-5648ad2c",
+            "Description": "The Windows Server AMI ID required for the AD Mgmt EC2 Instance, such as ami-663bdc04",
             "Type": "String",
             "AllowedPattern": "ami-([a-f]|[0-9])+",
             "MinLength": "12",
