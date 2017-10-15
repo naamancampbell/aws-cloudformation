@@ -577,6 +577,21 @@
                 }
             }
         },
+        "SGExtInboundCertAuthFromInternet": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Properties":{
+                "IpProtocol": "tcp",
+                "FromPort": "49443",
+                "ToPort": "49443",
+                "CidrIp": "0.0.0.0/0",
+                "GroupId": {
+                "Fn::GetAtt": [
+                    "EC2SG2VZRC",
+                    "GroupId"
+                ]
+                }
+            }
+        },        
         "SGExtInboundRDPFromKnownHosts": {
             "Type": "AWS::EC2::SecurityGroupIngress",
             "Properties":{
